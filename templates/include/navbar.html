@@ -1,0 +1,40 @@
+{% load static %}
+<header>
+    <section class="navbar">
+        <ul>
+            <li>
+                <a href="{% url 'index' %}"><span class="logo ">LOGO</span></a>
+
+            </li>
+            <li>
+                <a href="{% url 'all_universities' %}">
+                        <span>
+                        Университеты
+                        </span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'all_faculties' %}">
+                        <span>
+                        Факультеты
+                    </span>
+                </a>
+            </li>
+            <li>
+                    <span class=" spanButton ">
+                        <select>
+                            <option value="города ">Города</option>
+                            <option value="университеты ">Университеты</option>
+                            <option value="факультеты ">Факультеты</option>
+                        </select>
+                    </span>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <input placeholder="Найти " type="text ">
+                <input value="OK " class="in " type="submit ">
+            </li>
+        </ul>
+    </section>
+</header>

@@ -1,0 +1,35 @@
+{% include 'include/navbar.html' %} {% load static %}
+{% load static %}
+<html lang="en">
+<body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/5c459b5eb0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<main>
+    <section class="main_container">
+        {% for population in cities%}
+        <div class="mainCard" href="{% url 'city' population.id %}">
+            <img src=" {{ population.city_image.first.image.url }}">
+            <div class="mainCard_inside ">
+                <h3>{{ population.city }}</h3>
+                <div class="mainCard_inside_content ">
+                    <p>{{ city.description }}</p>
+                    <a href="{% url 'city' population.id %} ">
+                        <button>read more</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+</main>
+</body>
+{% block content %} 
+{% endblock  %}
+
+</html>
