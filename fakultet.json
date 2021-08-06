@@ -1,0 +1,13 @@
+[
+    {
+        "model": "fakultet.faculty",
+        "pk": 1,
+        "fields": {
+            "university": 2,
+            "faculty": "eqweq",
+            "slug": "jhqwjeq",
+            "description": "qejwheqjkewhqjk",
+            "price": 12312
+        }
+    }
+]

@@ -1,40 +1,48 @@
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/style_2.css' %}">
 <header>
     <section class="navbar">
         <ul>
             <li>
-                <a href="{% url 'index' %}"><span class="logo ">LOGO</span></a>
+                <a href="{% url 'index' %}"><span class="logo ">CITIES</span></a>
 
             </li>
             <li>
                 <a href="{% url 'all_universities' %}">
-                        <span>
-                        Университеты
-                        </span>
+                    <span>
+                        Universities
+                    </span>
                 </a>
             </li>
             <li>
                 <a href="{% url 'all_faculties' %}">
-                        <span>
-                        Факультеты
+                    <span>
+                        Faculties
                     </span>
                 </a>
             </li>
             <li>
-                    <span class=" spanButton ">
-                        <select>
-                            <option value="города ">Города</option>
-                            <option value="университеты ">Университеты</option>
-                            <option value="факультеты ">Факультеты</option>
-                        </select>
-                    </span>
+                <span>
+                    <div class="dropdownButton">
+                        <button class="dropdownButtonBtn"> Create &#8628; </button>
+                        <div class="dropdownButtonDiv displayNone">
+                            <a href='{% url "create_city" %}'>Города</a>
+                            <a href="{% url 'create_university' %}">Университеты</a>
+                            <a href="{% url 'create_faculty' %}">Факультеты</a>
+                        </div>
+                    </div>
+                </span>
             </li>
         </ul>
         <ul>
             <li>
-                <input placeholder="Найти " type="text ">
-                <input value="OK " class="in " type="submit ">
+                <form>
+                        {% csrf_token %}
+                        <input name="words" type="text"  id="search_input"  placeholder="search">
+                        <button name="key_word" type="submit" class="btn btn-outline-success ">enter</button>
+                </form>
             </li>
         </ul>
     </section>
 </header>
+<script src="{% static 'js/script.js' %}"></script>

@@ -1,0 +1,74 @@
+{% extends 'cities/index.html' %}{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<section class="card_container">
+    <div class="city_card">
+        <div class="card_header">
+            <h3>{{ city.city }}</h3>
+        </div>
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ city.city_image.first.image.url }}" class="d-block w-100" alt="...">
+                </div>
+                {% for image in city.city_image.all %}
+                <div class="carousel-item">
+                    <img src="{{ image.image.url }}" class="d-block w-100" alt="...">
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div style="margin-bottom: 30px" class="card_content">
+            <p>Описание города:<span>{{ city.description }}</span></p>
+            <p>Численность населения: <span>{{ city.population }}</span></span>
+        </div>
+
+        <a href="{% url 'delete_city' city.id %}">
+            <button class='deleteBtn'
+                    style="background: red ; margin-right: 10px ; outline: none ; border: none; color: white ; font-weight: bolder ; padding: 10px ; border-radius: 10px ; cursor: pointer">
+                удалить
+            </button>
+        </a>
+        <a href="{% url 'update_city' city.id %}">
+            <button class='deleteBtn'
+                    style="background: green ; margin-right: 10px ; outline: none ; border: none; color: white ; font-weight: bolder ; padding: 10px ; border-radius: 10px ; cursor: pointer">
+                изменить
+            </button>
+        </a>
+    </div>
+
+    <div class="card_wrapper">
+        {% for univer in city.univer.all %}
+        <label href='{% url "university" univer.id %}'>
+            <p class="nameOfUn" href='{% url "university" univer.id %}'>
+                Название университета: <a href='{% url "university" univer.id %}''><span>{{ univer.university }}
+                    </span></a>
+            </p>
+            <p class="nameOfUn">
+                Кол-во студентов: <span>{{ univer.number_of_people }}</span>
+            </p>
+        </label>
+        {% endfor %}
+    </div>
+</section>
+</body>
+</html>
+{% endblock %}

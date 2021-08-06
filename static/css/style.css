@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
-body {
+
+body{
     margin: 0px;
     font-family: 'Montserrat', sans-serif;
 }
 
-.navbar {
+.navbar{
     width: 100%;
     height: 60px;
     background: rgb(49, 49, 49);
@@ -15,7 +16,7 @@ body {
     padding: 0 30px;
 }
 
-.navbar ul {
+.navbar ul{
     margin: 0px;
     padding: 0px;
     align-items: center;
@@ -23,26 +24,26 @@ body {
     display: flex;
 }
 
-.navbar ul:nth-child(1) li {
+.navbar ul:nth-child(1) li{
     margin: 0 25px;
 }
 
-.navbar ul:nth-child(1) li span {
+.navbar ul:nth-child(1) li span{
     cursor: pointer;
     color: white;
-    font-weight: 500;
+    font-weight: 500;   
     position: relative;
     font-size: 16px;
 }
 
-.logo {
+.logo{
     color: white;
     font-weight: 600 !important;
     font-size: 25px !important;
     cursor: pointer;
 }
 
-.navbar ul:nth-child(1) li span::before {
+.navbar ul:nth-child(1) li span::before{
     content: "";
     transition: .3s;
     position: absolute;
@@ -53,12 +54,12 @@ body {
     background: rgb(250, 250, 250);
 }
 
-.navbar ul:nth-child(1) li span:hover:before {
+.navbar ul:nth-child(1) li span:hover:before{
     left: 0;
     width: 100%;
 }
 
-.navbar ul:nth-child(2) li input {
+.navbar ul:nth-child(2) li input{
     width: 280px;
     box-sizing: border-box;
     border: none;
@@ -67,11 +68,11 @@ body {
     padding: 10px;
 }
 
-.navbar ul:nth-child(2) li input:focus {
+.navbar ul:nth-child(2) li input:focus{
     box-shadow: 0px 0px 4px 4px rgba(255, 255, 255, 0.301);
 }
 
-.in {
+.in{
     width: 40px !important;
     background: #000;
     border: none;
@@ -80,7 +81,7 @@ body {
     color: white;
 }
 
-.mainCard {
+.mainCard{
     width: 31%;
     padding: 30px;
     height: 350px;
@@ -90,15 +91,7 @@ body {
     margin-bottom: 40px;
 }
 
-.mainCard img {
-    width: 100%;
-    top: 0;
-    left: 0;
-    height: 100%;
-    position: absolute;
-}
-
-.main_container {
+.main_container{
     width: 92%;
     margin: 0 auto;
     flex-wrap: wrap;
@@ -107,7 +100,7 @@ body {
     margin-top: 50px;
 }
 
-.mainCard_inside {
+.mainCard_inside{
     position: absolute;
     bottom: -77%;
     left: 0;
@@ -119,22 +112,22 @@ body {
     width: 100%;
 }
 
-.mainCard:hover .mainCard_inside {
+.mainCard:hover .mainCard_inside{
     bottom: 0;
 }
 
-.mainCard_inside h3 {
+.mainCard_inside h3{
     font-size: 25px;
 }
 
-.mainCard_inside p {
+.mainCard_inside p{
     line-height: 1.6;
     margin: 0 auto;
     width: 70%;
     margin-bottom: 30px;
 }
 
-.mainCard_inside button {
+.mainCard_inside button{
     border: none;
     border: 1px solid white;
     background: none;
@@ -147,7 +140,60 @@ body {
     cursor: pointer;
 }
 
-.mainCard_inside button:hover {
+.mainCard_inside button:hover{
     background: white;
+    color:black;
+}
+/* main css */
+.row_main{
+    width: 100%;
+    height: 100vh;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    height: auto;
+    /* padding: 0px; */
+}
+.info_card{
+    width: 25%;
+    height: auto;
+    padding: 20px 25px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    background: rgb(49, 49, 49);
+}
+
+.info_card h2{
+    color: white;
+    font-size: 35px;
+    margin: 0px;
+    font-weight: 600;
+}
+
+.info_card a{
+    text-decoration: none;
+    padding: 5px 10px;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    border: 1px solid white;
+    transition: .3s;
+}
+
+.info_card a:hover{
     color: black;
+    background: white;
+}
+
+.info_card p{
+    color: white;
+    font-size: 16px;
+    padding-bottom: 25px;
+    margin-bottom: 21px;
+    border-bottom: 1px solid rgb(207, 207, 207);
+    line-height: 1.6;
 }

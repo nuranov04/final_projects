@@ -1,0 +1,13 @@
+{% extends 'cities/index.html' %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+   <h2>Are you sure delete?</h2>
+<a>
+    <button type="submit">
+        удалить
+    </button>
+</a>
+</form>
+
+{% endblock %}

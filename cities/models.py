@@ -1,15 +1,15 @@
 from django.db import models
+from django.db.models.fields import related
 from django.db.models.signals import pre_save
 
 
 class City(models.Model):
     city = models.CharField(
         max_length=255,
-        verbose_name='город'
+        verbose_name='город',
     )
     description = models.TextField()
     population = models.IntegerField()
-    slug = models.SlugField(blank=True, unique=True)
 
     def __str__(self):
         return f'{self.city}'
@@ -44,16 +44,29 @@ class University(models.Model):
         verbose_name='унивеститет'
     )
     description = models.TextField()
-    image = models.ImageField(
-        verbose_name='Картинки',
-        blank=True, null=True,
-    )
     number_of_people = models.IntegerField(
         blank=True, null=True,
     )
 
     def __str__(self):
-        return f"{self.university}--{self.city}"
+        return f"{self.city}--{self.university}"
 
         class Meta:
-            ordering = ('-id',)
+            ordering = ('-id')
+
+
+class UniversityImage(models.Model):
+    university = models.ForeignKey(
+        University,
+        on_delete=models.CASCADE,
+        related_name='university_image'
+    )
+
+    image = models.ImageField(
+        upload_to='city',
+        verbose_name='Картинки',
+        blank=True, null=True,
+    )
+
+    def __str__(self):
+        return f"{self.university}---{self.id}"

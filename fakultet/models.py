@@ -12,21 +12,16 @@ class Faculty(models.Model):
     )
     faculty = models.CharField(
         max_length=255,
+        
     )
-    slug = models.SlugField(blank=True)
+
     description = models.TextField()
     price = models.IntegerField()
 
-    def __str__(self) -> str:
-        return f"{self.faculty}---{self.university}"
+    def __str__(self):
+        return f"{self.university}--{self.faculty}"
 
     class Meta:
         ordering = ('-id',)
 
 
-def slag_pre_save_receiver(sender, instance, *args, **kwargs):
-    if not instance.slug:
-        instance.slug = unique_slug_generators(instance)
-
-
-pre_save.connect(slag_pre_save_receiver, sender=Faculty)

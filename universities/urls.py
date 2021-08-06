@@ -22,6 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('cities.urls')),
     path("faculty/", include('fakultet.urls')),
+    path('api/', include('cities.api.urls')),
+    path('api/', include('fakultet.api.urls'))
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

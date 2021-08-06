@@ -1,0 +1,15 @@
+{% extends 'cities/index.html' %}
+{% include 'include/navbar.html' %}
+{% load static %}
+{% block content %}
+
+<div class='row_main'>
+    {% for faculty in faculties %}
+    <div class="info_card" style="margin-left:7px">
+        <h2>{{ faculty.faculty }}</h2>
+        <p>{{ faculty.description | truncatewords:15 }}</p>
+        <a class="#" href="{% url 'faculty_detail' faculty.id %}">read more</a>
+    </div>
+    {% endfor %}
+</div>    
+{% endblock %}
