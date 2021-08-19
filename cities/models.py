@@ -1,6 +1,4 @@
 from django.db import models
-from django.db.models.fields import related
-from django.db.models.signals import pre_save
 
 
 class City(models.Model):
@@ -10,6 +8,7 @@ class City(models.Model):
     )
     description = models.TextField()
     population = models.IntegerField()
+    date_of_born = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return f'{self.city}'
@@ -39,6 +38,7 @@ class University(models.Model):
         on_delete=models.CASCADE,
         related_name='univer'
     )
+    date_of_born = models.DateField(blank=True, null=True)
     university = models.CharField(
         max_length=255,
         verbose_name='унивеститет'
@@ -51,8 +51,8 @@ class University(models.Model):
     def __str__(self):
         return f"{self.city}--{self.university}"
 
-        class Meta:
-            ordering = ('-id')
+    class Meta:
+        ordering = ['-id']
 
 
 class UniversityImage(models.Model):
@@ -70,3 +70,6 @@ class UniversityImage(models.Model):
 
     def __str__(self):
         return f"{self.university}---{self.id}"
+
+    class Meta:
+        ordering= ['-id']

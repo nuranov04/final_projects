@@ -1,8 +1,7 @@
 from django.urls import path, include
 from .views import (
     all_universities,
-    index,
-    university_detail,
+    IndexListView,
     city_detail,
     create_city,
     create_university,
@@ -10,18 +9,19 @@ from .views import (
     update_university,
     delete_city,
     university_delete,
+    university_detail
 )
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('', index, name='index'),
-    path('city_detail/<int:id>/', city_detail, name='city'),
+    path('', IndexListView.as_view(), name='index'),
+    path('city_detail/<int:id>/', city_detail, name='detail_city'),
     path('update_city/<int:id>/', update_city, name='update_city'),
     path('create_city/', create_city, name='create_city'),
     path('delete_city/<int:id>', delete_city, name='delete_city'),
-    path('all_universities', all_universities, name='all_universities'),
-    path('university_detail/<int:id>/', university_detail, name='university'),
+    # path('all_universities', all_universities, name='all_universities'),
+    path('university_detail/<int:id>/', university_detail ,name='university'),
     path('create_university/', create_university, name='create_university'),
     path('update_university/<int:id>', update_university, name='update_university'),
     path('delete_university/<int:id>', university_delete, name='delete_university'),

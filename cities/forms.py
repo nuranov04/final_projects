@@ -11,7 +11,7 @@ class CityForm(forms.ModelForm):
         widgets = {
             'city': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
-            'population': forms.NumberInput(attrs={'class': 'form-control'})
+            'population': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
 
