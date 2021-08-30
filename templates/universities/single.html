@@ -5,7 +5,7 @@
     data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="page-title">
-        <span>{{ university.date_of_born }}</span>
+        <span>{{ university.city }}</span>
         <h2>{{ university.university }}</h2>
     </div>
 </div>
@@ -15,9 +15,47 @@
             <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
                 <h4>{{university.description }}</h4>
             </div>
+            <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
+                <h4>count of students: {{university.number_of_people }}</h4>
+            </div>
         </div>
     </div>
 </div>
+{% if user.is_superuser %}
+<div style="margin-left:310px">
+    <a href="{% url 'delete_university' university.id %}">
+        <button class='deleteBtn'
+            style="background: red ; margin-right: 10px ; outline: none ; border: none; color: white ; font-weight: bolder ; padding: 10px ; border-radius: 10px ; cursor: pointer">
+            удалить
+        </button>
+    </a>
+    <a href="{% url 'update_university' university.id %}">
+        <button class='deleteBtn'
+            style="background: green ; margin-right: 10px ; outline: none ; border: none; color: white ; font-weight: bolder ; padding: 10px ; border-radius: 10px ; cursor: pointer">
+            изменить
+        </button>
+    </a>
+</div>
+{% endif %}
+{% for comment in university.university_comments.all %}
+<div class="comments p-3">
+    {{ comment.text }}
+</div>
+{% endfor %}
+{% if user.is_authenticated %}
+<div class="card-footer p-0 d-flex">
+    <form method="post" class="form-control">
+        {% csrf_token %}
+        <input type="hidden" name="university_id" value="{{ university.id }}">
+        <input type="text" name="comment_text" class="form-control" placeholder="Оставьте комментарии...">
+        <button type="submit" name="comment" class="btn btn-danger">
+            Comment
+        </button>
+    </form>
+</div>
+{% else %}
+<h4 style="color: red">Login user or Register to send message</h4>
+{% endif %}
 <div class="container-fluid pb-4 pt-5">
     <div class="container animate-box">
         <div>

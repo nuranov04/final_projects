@@ -41,6 +41,15 @@
     <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
     <!-- Main -->
     <script src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
+    <script type="text/javascript">
+        $('.formset_row').formset({
+            addText: '<button class="btn btn-info mt-3">Add new image</button>',
+            deleteText: '<button class="btn btn-danger">Delete</button>',
+            prefix: 'city_image',
+        });
+    </script>
 </body>
 
 </html>

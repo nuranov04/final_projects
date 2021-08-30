@@ -1,0 +1,84 @@
+{% extends 'single_index.html' %}
+{% load static %}
+{% block content %}
+<div id="fh5co-title-box" style="background-image: url({{ city.city_image.first.image.url }})"
+    data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="page-title">
+        <span>{{ city.date_of_born }}</span>
+        <h2>{{ city.city }}</h2>
+    </div>
+</div>
+<div id="fh5co-single-content" class="container-fluid pb-4 pt-4 paddding">
+    <div class="container paddding">
+        <div class="row mx-0">
+            <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
+                <p>
+                    {{ city.description }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pb-4 pt-5">
+    <div class="container animate-box">
+        {% if user.is_superuser %}
+        <a href="{% url 'delete_city' city.id %}">
+            <button class='deleteBtn'
+                style="background: red ; margin-right: 10px ; outline: none ; border: none; color: white ; font-weight: bolder ; padding: 10px ; border-radius: 10px ; cursor: pointer">
+                удалить
+            </button>
+        </a>
+        <a href="{% url 'update_city' city.id %}">
+            <button class='deleteBtn'
+                style="background: green ; margin-right: 10px ; outline: none ; border: none; color: white ; font-weight: bolder ; padding: 10px ; border-radius: 10px ; cursor: pointer">
+                изменить
+            </button>
+        </a>
+        {% endif %}
+        {% for comment in city.city_comments.all %}
+        <div class="comments p-3">
+            {{ comment.text }}
+        </div>
+        {% endfor %}
+        {% if user.is_authenticated %}
+
+        <div class="card-footer p-0 d-flex">
+            <form method="post" class="form-control">
+                {% csrf_token %}
+                <input type="hidden" name="city_id" value="{{ city.id }}">
+                <input type="text" name="comment_text" class="form-control" placeholder="Оставьте комментарии...">
+                <button type="submit" name="comment" class="btn btn-danger">
+                    Comment
+                </button>
+            </form>
+        </div>
+        {% else %}
+        <h4 style="color: red">Login user or Register to send message</h4>
+        {% endif %}
+        <div>
+            <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Universities</div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap;" class="d-flex d-wrapper">
+            {% for univer in city.univer.all %}
+            <div class="owl-theme">
+                <div class="item px-2">
+                    <div class="fh5co_hover_news_img">
+                        <div class="fh5co_news_img">
+                            <img style="width: 300px;" src="{{ univer.university_image.first.image.url }}" alt="" />
+                        </div>
+                        <div>
+                            <a href="{% url 'university' univer.id %}" class="d-block fh5co_small_post_heading"><span
+                                    class="">{{ univer.university }}</span></a>
+                            <div class="c_g"><i class="fa fa-clock-o"></i> {{ univer.date_of_born }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+</html>
+{% endblock %}

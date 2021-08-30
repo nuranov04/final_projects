@@ -1,15 +1,11 @@
-from django.urls import path, include
-from fakultet.views import all_faculty, faculty_detail, create_faculty
-from django.conf.urls.static import static
-from django.conf import settings
-
+from django.urls import path
+from fakultet.views import faculty_detail, create_faculty, delete_faculty, update_faculty, ApplicationCreateView
 
 urlpatterns = [
-    path('all_faculties/', all_faculty, name='all_faculties'),
+    # path('all_faculties/', all_faculty, name='all_faculties'),
     path('faculty_detail/<int:id>', faculty_detail, name='faculty_detail'),
     path('create_faculty/', create_faculty, name='create_faculty'),
+    path('update_faculty/<int:id>', update_faculty, name='update_faculty'),
+    path('delete_faculty/<int:id>/', delete_faculty, name='delete_faculty'),
+    path('application/', ApplicationCreateView.as_view(), name='application')
 ]
-
-
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

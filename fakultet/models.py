@@ -33,3 +33,19 @@ class Faculty(models.Model):
         ordering = ('-id',)
 
 
+class Application(models.Model):
+    email = models.EmailField()
+    faculty = models.ForeignKey(
+        Faculty,
+        on_delete=models.CASCADE,
+        related_name='application_faculty'
+    )
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    number_of_phone = models.IntegerField()
+    create_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return f"{self.email}--{self.first_name}"
+
+    

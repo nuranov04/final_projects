@@ -7,7 +7,7 @@ from django.db.models import Q
 from cities.forms import CityForm, CityImageForm, UniversityForm, UniversityImageForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView, DetailView
-
+from comment.models import CommentCity, CommentUniversity
 
 # def index(request):
 #     university = University.objects.all()
@@ -42,11 +42,17 @@ class IndexListView(ListView):
         context['faculty'] = Faculty.objects.all()
         return context
 
+
 # CRUD FOR CITIES
 
 def city_detail(request, id):
     city_obj = City.objects.get(id=id)
-    return render(request, 'single.html', {'city': city_obj})
+    if 'comment' in request.POST:
+        id = request.POST.get('city_id')
+        city = City.objects.get(id=id)
+        text = request.POST.get('comment_text')
+        comment = CommentCity.objects.create(text=text, city=city, user=request.user)
+    return render(request, 'cities/single.html', {'city': city_obj})
 
 
 def update_city(request, id):
@@ -107,7 +113,7 @@ def create_university(request):
             request.POST, request.FILES, instance=university)
         if formset.is_valid():
             formset.save()
-        return redirect('all_universities')
+        return redirect('index')
     formset = UniversityImageFormset()
     return render(request, 'universities/create_university.html', locals())
 
@@ -139,16 +145,21 @@ def university_delete(request, id):
 def university_detail(request, id):
     faculties = Faculty.objects.all()
     university = University.objects.get(id=id)
+    if 'comment' in request.POST:
+        id = request.POST.get('university_id')
+        university = University.objects.get(id=id)
+        text = request.POST.get('comment_text')
+        comment = CommentUniversity.objects.create(text=text, university=university, user=request.user)
     return render(request, 'universities/single.html', locals())
 
 
-# class UniversityDetail(DetailView):
-    # queryset = Faculty.objects.all()
-    # model = Faculty
-    # template_name = 'universities/detail.html'
-    # context_object_name = 'faculties'
+class UniversityDetail(DetailView):
+    queryset = Faculty.objects.all()
+    model = Faculty
+    template_name = 'universities/detail.html'
+    context_object_name = 'faculties'
 
-    # def get_context_data(self, **kwargs):
-        # context = super().get_context_data(**kwargs)
-        # context['university'] = University.objects.all()
-        # return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['university'] = University.objects.all()
+        return context

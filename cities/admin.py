@@ -1,7 +1,28 @@
 from django.contrib import admin
-from .models import City, University,CityImage,UniversityImage
+from cities import models
 
-admin.site.register(University)
-admin.site.register(UniversityImage)
-admin.site.register(City)
-admin.site.register(CityImage)
+
+class CityImageAdmin(admin.TabularInline):
+    model = models.CityImage
+    extra = 3
+
+
+class CityAdmin(admin.ModelAdmin):
+    list_display = ['city']
+    search_fields = ['city']
+    inlines = [CityImageAdmin]
+
+
+class UniversityImageAdmin(admin.TabularInline):
+    model = models.UniversityImage
+    extra = 3
+
+
+class UniversityAdmin(admin.ModelAdmin):
+    list_display = ['university']
+    search_fields = ['university']
+    inlines = [UniversityImageAdmin]
+
+
+admin.site.register(models.University, UniversityAdmin)
+admin.site.register(models.City, CityAdmin)

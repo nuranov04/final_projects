@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-3 fh5co_padding_menu">
-                <a href="{% url 'index' %}" >
+                <a href="{% url 'index' %}">
                     <img src="{% static 'image/logo.png' %}" alt="img" class="fh5co_logo_width"/>
                 </a>
             </div>
@@ -40,7 +40,7 @@
 </div>
 <div style="background-color:rgb(51, 56, 75);" class="container-fluid bg-faded fh5co_padd_mediya padding_786">
     <div class="container padding_786">
-        <nav  class="navbar navbar-toggleable-md navbar-light ">
+        <nav class="navbar navbar-toggleable-md navbar-light ">
             <button class="navbar-toggler navbar-toggler-right mt-3" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
@@ -56,7 +56,8 @@
                     </li> -->
                     {% if user.is_superuser %}
                     <li class="nav-item dropdown">
-                        <a style="font-size: 18px;" class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton2" data-toggle="dropdown"
+                        <a style="font-size: 18px;" class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton2"
+                           data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">create <span class="sr-only">(current)</span></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
                             <a class="dropdown-item" href="{% url 'create_city' %}">city</a>
@@ -65,9 +66,30 @@
                         </div>
                     </li>
                     {% endif %}
-                    <h3 style="margin-top:5px; margin-left: 270px; color: rgb(236, 194, 194);">Artur is king</h3>
-                </ul>
+                    <li>
+                        <h3 style="margin-top:5px; margin-left: 430px; color: rgb(236, 194, 194);">Artur is king</h3>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <h3 style="margin-top:5px; margin-left: 20px; color: white" >{{ user.username }}</h3>
+                        <div style="margin-left: 200px;">
+                            <a href="{% url 'logout' %}" class="btn btn-danger">Log out</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item dropdown">
+                        <a style="font-size: 18px;" class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton2"
+                           data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">registration<span class="sr-only">(current)</span></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
+                            <a class="dropdown-item" href="{% url 'singup' %}">singup</a>
+                            <a class="dropdown-item" href="{% url 'login' %}">login</a>
+                        </div>
+                    </li>
+                    {% endif %}
             </div>
-        </nav>
+            </ul>
     </div>
+    </nav>
+</div>
 </div>

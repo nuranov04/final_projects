@@ -1,10 +1,10 @@
+
 {% extends 'index.html' %}
 {% block content %}
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form }}
+    {{ form.as_p }}
     <table class="table">
-        {{ formset.management_form }}
         {{ formset.non_form_errors }}
         {% for form in formset.forms %}
         {% if forloop.first %}
@@ -32,7 +32,7 @@
         </tr>
         {% endfor %}
     </table>
-    <button type="submit" class="mb-2 btn btn-success d-block mx-auto">Создать</button>
+    <button type="submit" class="mb-2 btn btn-success d-block mx-auto">Submit</button>
     </div>
     </div>
     </div>

@@ -13,8 +13,8 @@ class City(models.Model):
     def __str__(self):
         return f'{self.city}'
 
-        class Meta:
-            ordering = ('-id',)
+    class Meta:
+        ordering = ('-id',)
 
 
 class CityImage(models.Model):
@@ -49,7 +49,7 @@ class University(models.Model):
     )
 
     def __str__(self):
-        return f"{self.city}--{self.university}"
+        return f"{self.university}"
 
     class Meta:
         ordering = ['-id']

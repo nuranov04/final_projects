@@ -1,6 +1,36 @@
 {% extends 'index.html' %}{% load static %}
 {% block content %}
+{% if user.is_superuser %}
+<div style="margin-top:30px; margin-left:30px" >
+    <a href="{% url 'delete_faculty' faculty.id %}">
+        <button class='deleteBtn'
+                style="background: red ; margin-right: 10px ; outline: none ; border: none; color: white ; font-weight: bolder ; padding: 10px ; border-radius: 10px ; cursor: pointer">
+            удалить
+        </button>
+    </a>
+    <a href="{% url 'update_faculty' faculty.id %}">
+        <button class='deleteBtn'
+                style="background: green ; margin-right: 10px ; outline: none ; border: none; color: white ; font-weight: bolder ; padding: 10px ; border-radius: 10px ; cursor: pointer">
+            изменить
+        </button>
+    </a>
+</div>
+{% endif %}
+<div style="margin-top:25px; margin-left:30px">
 
-{{  }}
+    <h3>{{ faculty.university }}</h3>
+    <h1>{{ faculty.faculty }}</h1>
+
+    <a>{{ faculty.description }} </a>
+<div style="margin-top:15px">
+    <p>{{ faculty.price }}</p>
+</div>
+    {% if faculty.open_or_close %}
+    <a href="{% url 'application' %}"><button class="btn vtn-succses">подать заявку</button></a>        
+    {% else %}
+    <a>набор закрыт</a>
+    {% endif %}
+</div>
+
 {% endblock  %}
     
