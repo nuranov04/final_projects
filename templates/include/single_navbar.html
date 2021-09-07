@@ -78,7 +78,9 @@
                     {% endif %}
                     {% if user.is_authenticated %}
                     <li>
-                        <h3 style="margin-top:5px; margin-left: 20px; color: black" >{{ user.username }}</h3>
+                        <a href="{% url 'profile' user.id %}" >
+                            <h3  style="margin-top:5px; margin-left: 20px; color: black" >{{ user.username }}</h3>
+                        </a>
                         <div style="margin-left: 200px;">
                             <a href="{% url 'logout' %}" class="btn btn-danger">Log out</a>
                         </div>

@@ -55,7 +55,8 @@ class ApplicationCreateView(CreateView):
     template_name = 'faculties/create_faculty.html'
 
     def form_valid(self, form):
-        if form.instance:
-            if form.open_or_close == 'True':
-                form.save()
+
+        if form.is_valid():
+            form.save()
         return super().form_valid(form)
+

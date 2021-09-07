@@ -5,7 +5,7 @@ from .models import University, City, CityImage, UniversityImage
 from fakultet.models import Faculty
 from django.db.models import Q
 from cities.forms import CityForm, CityImageForm, UniversityForm, UniversityImageForm
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from favourite.models import Favourite
 from django.views.generic import ListView, DetailView
 from comment.models import CommentCity, CommentUniversity
 
@@ -150,6 +150,12 @@ def university_detail(request, id):
         university = University.objects.get(id=id)
         text = request.POST.get('comment_text')
         comment = CommentUniversity.objects.create(text=text, university=university, user=request.user)
+    if 'favourite' in request.POST:
+        try:
+            favourite = Favourite.objects.get()
+            favourite.delete()
+        except:
+            Favourite.objects.create(user=request.user, university=university)
     return render(request, 'universities/single.html', locals())
 
 

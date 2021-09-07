@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <div class="container-fluid">
     <div class="container">
         <div class="row">
@@ -71,7 +72,9 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li>
-                        <h3 style="margin-top:5px; margin-left: 20px; color: white" >{{ user.username }}</h3>
+                        <a href='{% url "profile" user.id %}' >
+                            <h3 style="margin-top:5px; margin-left: 20px; color: white" >{{ user.username }}</h3>
+                        </a>
                         <div style="margin-left: 200px;">
                             <a href="{% url 'logout' %}" class="btn btn-danger">Log out</a>
                         </div>
@@ -84,6 +87,7 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
                             <a class="dropdown-item" href="{% url 'singup' %}">singup</a>
                             <a class="dropdown-item" href="{% url 'login' %}">login</a>
+                            <a class="dropdown-item" href="{% provider_login_url 'google' %}">google</a>
                         </div>
                     </li>
                     {% endif %}

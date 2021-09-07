@@ -26,5 +26,6 @@ def login_user(request):
             messages.error(request, 'Not correct login or password')
     return render(request, 'login.html')
 
-# def logout_user(request):
-
+def User_profile(request, id):
+    profile = User.objects.get(id=id)
+    return render(request, 'profile.html', locals())
