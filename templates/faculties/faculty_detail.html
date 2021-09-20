@@ -26,7 +26,19 @@
         <p>{{ faculty.price }}</p>
     </div>
     {% if faculty.open_or_close %}
-    <a href="{% url 'application' %}"><button class="btn vtn-succses">подать заявку</button></a>
+    <div class="card-footer p-0 d-flex">
+        <form method="post" class="form-control">
+            {% csrf_token %}
+            <input type="hidden" name="faculty_id" value="{{ faculty.id }}">
+            <input style="margin-bottom: 15px;" type="text" name="email" class="form-control" placeholder="enter email">
+            <input style="margin-bottom: 15px;" type="text" name="first_name" class="form-control" placeholder="enter first name"> 
+            <input style="margin-bottom: 15px;" type="text" name="last_name" class="form-control" placeholder="enter last name"> 
+            <input style="margin-bottom: 15px;" type="text" name="number_of_phone" class="form-control" placeholder="enter number of phone"> 
+            <button style="margin-bottom: 15px;" type="submit" name="application" class="btn btn-danger">
+                Comment
+            </button>
+        </form>
+    </div>
     {% else %}
     <a>набор закрыт</a>
     {% endif %}
@@ -34,12 +46,15 @@
 
 
 <div>
-    {% for aplication in faculty.application_faculty.all %}
+    <div style="margin-left: 32px; margin-top: 20px;" >
+        <h5>общее кол-во заявок:</h5><h2>{{ faculty.application_faculty.all.count }}</h2>
+    </div>
+    <!-- {% for aplication in faculty.application_faculty.all %}
     <div style="margin-left: 32px; margin-top: 20px;">
         <p>{{ aplication.first_name }}---{{ aplication.create_at }}</p>
         <p></p>
     </div>
-    {% endfor %}
+    {% endfor %} -->
 </div>
 
 {% endblock %}

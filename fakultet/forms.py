@@ -10,8 +10,4 @@ class FacultyForm(forms.ModelForm):
         model = Faculty
         fields = ['university', 'faculty', 'description', 'price', 'open_or_close']
 
-class ApplicationForm(forms.ModelForm):
 
-    class Meta:
-        model = Application
-        fields = ['faculty','email', 'first_name', 'last_name', 'number_of_phone']

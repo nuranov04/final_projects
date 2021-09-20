@@ -1,4 +1,3 @@
-from rest_framework import generics
 from cities.api.serilazers import *
 from cities.models import *
 from rest_framework import viewsets

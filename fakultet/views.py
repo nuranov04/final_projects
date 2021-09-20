@@ -1,8 +1,9 @@
 from django.db import models
 from django.shortcuts import render, redirect
 from .models import Faculty, Application
+from django.core.mail import send_mail
 from django.db.models import Q
-from fakultet.forms import FacultyForm, ApplicationForm
+from fakultet.forms import FacultyForm
 from django.views.generic import CreateView
 
 
@@ -18,7 +19,27 @@ from django.views.generic import CreateView
 
 def faculty_detail(request, id):
     faculty = Faculty.objects.get(id=id)
-    return render(request, 'faculties/faculty_detail.html', locals())
+    if 'application' in request.POST:
+        email = request.POST.get('email')
+        faculty = Faculty.objects.get(id=id)
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        number_of_phone = request.POST.get('number_of_phone')
+        application = Application.objects.create(email = email, faculty = faculty,
+            first_name = first_name, last_name = last_name, number_of_phone = number_of_phone
+        )
+        message = f'Уважаемый {first_name} {last_name}, вы подали заявку на факультет "{faculty}". \n с Уважением сайт Артура)'
+        print(message)
+        send_mail(
+            'Подача заявки на факультет',
+            message,
+            'nursultandev@gmail.com',
+            [email],
+            fail_silently=False
+        )
+        print('done')
+        return redirect('index')
+    return render(request, 'faculties/faculty_detail.html', {'faculty': faculty})
 
 
 def create_faculty(request):
@@ -48,15 +69,4 @@ def update_faculty(request, id):
     return render(request, 'faculties/update.html', locals())
 
 
-class ApplicationCreateView(CreateView):
-    model = Application
-    form_class = ApplicationForm
-    success_url = '/'
-    template_name = 'faculties/create_faculty.html'
-
-    def form_valid(self, form):
-
-        if form.is_valid():
-            form.save()
-        return super().form_valid(form)
 

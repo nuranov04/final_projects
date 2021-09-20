@@ -4,7 +4,7 @@ from fakultet.views import (
     create_faculty, 
     delete_faculty, 
     update_faculty, 
-    ApplicationCreateView, 
+    # ApplicationCreateView, 
     )
 
 
@@ -14,5 +14,5 @@ urlpatterns = [
     path('create_faculty/', create_faculty, name='create_faculty'),
     path('update_faculty/<int:id>', update_faculty, name='update_faculty'),
     path('delete_faculty/<int:id>/', delete_faculty, name='delete_faculty'),
-    path('application/', ApplicationCreateView.as_view(), name='application'),
+    # path('application/', ApplicationCreateView.as_view(), name='application'),
 ]

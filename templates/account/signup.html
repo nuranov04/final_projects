@@ -1,0 +1,71 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div  class="login-form-wrapper">
+
+	<form style="margin-top:40px; margin-left: 60px;" method="POST" class="login-form">
+		{% csrf_token %}
+		<div style="margin-top:40px; margin-left: 60px;" class="login-container1">
+
+			<label for="psw"><b>Email</b></label>
+			<input class="login-input" id="login-email" type="email" placeholder="Введите имя пользователя" name="email"
+				required>
+			{% if form.email.errors %}
+			<p class="help is-danger">{{ form.email.errors }}</p>
+			{% endif %}
+
+			<label for="psw"><b>Пароль</b></label>
+			<input class="login-input" id="login-password1" type="password" placeholder="Введите пароль"
+				name="password1" required>
+			<label for="psw"><b>Пароль2</b></label>
+			<input class="login-input" id="login-password2" type="password" placeholder="Введите пароль"
+				name="password2" required>
+			{% if form.password1.errors %}
+			<p class="help is-danger">{{ form.password1.errors }}</p>
+			{% endif %}
+			{% if form.password2.errors %}
+			<p class="help is-danger">{{ form.password1.errors }}</p>
+			{% endif %}
+			<button id="login-btn" class="login-btn" type="submit">Регистрация</button>
+
+
+			<a href="{% url 'account_login' %}">Войти</a>
+		</div>
+
+		<div class="login-button-register" style="background-color:#f1f1f1">
+			<a href="{% url 'index' %}" type="button" class="login-button cancelbtn">Отмена</a>
+		</div>
+	</form>
+</div>
+<!-- <script>
+	$(function () {
+		$('#login-btn').on('click', () => {
+			$.ajax({
+				type: "POST",
+				url: "{% url 'account_signup' %}",
+				data: {
+					email: $('#login-email').val(),
+					password1: $('#login-password1').val(),
+					password2: $('#login-password2').val(),
+				},
+				success: function (response) {
+					$('.login-form-wrapper').html($(`
+						<h1>Hello world</h1>
+					`))
+				},
+				error: function (xhr, errmsg, err) {
+					console.log(err)
+					console.log(errmsg)
+				}
+			})
+
+		})
+
+	})
+</script> -->
+
+
+{% endblock %}

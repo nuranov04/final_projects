@@ -1,8 +1,10 @@
 from django.urls import path
-from users.views import UserCreateView, login_user, User_profile
+from django.conf.urls import url
+from users.views import *
+from allauth.account.views import confirm_email
+
 
 urlpatterns =[
-    path('singup/', UserCreateView.as_view(), name='singup'),
-    path('login/', login_user, name='login'),
-    path('profile/<int:id>', User_profile, name='profile'),
+    path('signup/', SignupView.as_view(), name='signup'),
+    path('login/', LoginView.as_view(), name='login'),
 ]

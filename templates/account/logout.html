@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{%  block content %}
+<div style="margin-left: 20px;" class="logout-form-wrapper">
+    <h3>Вы действительно хотите выйти?</h3>
+
+	<form method="post" action="/accounts/logout/">
+		{% csrf_token %}
+		<div class="logout-choices">
+			<button class="btn btn-danger" type="submit"> Выйти </button>
+			<a class="btn btn-success" type="button" href="{% url 'index' %}"><p>Отмена</p></a>
+		</div>
+	</form>
+</div>
+
+{% endblock %}
+

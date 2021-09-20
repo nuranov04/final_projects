@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% block content %}
+
+
+<div class="ui grid">
+	<div style="margin-top: 30px; margin-left: 30px;" class="login-form-wrapper">
+		<form class="login ui form" method="post">
+			{% csrf_token %}
+			<div class="login-container1">
+				<label for="uname"><b>Email пользователя</b></label>
+				<input class="login-input" type="email" placeholder="Введите email" name="login" required>
+	
+				<label for="psw"><b>Пароль</b></label>
+				<input class="login-input" type="password" placeholder="Введите пароль" name="password" required>
+	
+				<button class="login-button" type="submit">Войти</button>
+				<label class="remember-label">
+					<input type="checkbox" checked="checked" name="remember">
+					Запомнить меня
+				</label>
+	
+				<a href="{% url 'account_signup' %}">Регистрация</a>
+			</div>
+	
+			<div class="login-container" style="background-color:#f1f1f1">
+				<a href="{% url 'index' %}" type="button" class="login-button cancelbtn">Отмена</a>
+				<span class="psw"><a href="{% url 'account_reset_password' %}">Забыли пароль?</a></span>
+			</div>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

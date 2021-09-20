@@ -5,28 +5,8 @@ from .models import University, City, CityImage, UniversityImage
 from fakultet.models import Faculty
 from django.db.models import Q
 from cities.forms import CityForm, CityImageForm, UniversityForm, UniversityImageForm
-from favourite.models import Favourite
 from django.views.generic import ListView, DetailView
 from comment.models import CommentCity, CommentUniversity
-
-# def index(request):
-#     university = University.objects.all()
-#     faculty = Faculty.objects.all()
-#     page = request.GET.get('page', 1)
-#     paginator = Paginator(faculty, 4)
-#     cities = City.objects.all()
-#     try:
-#         faculties = paginator.page(page)
-#     except PageNotAnInteger:
-#         faculties = paginator.page(1)
-#     except EmptyPage:
-#         faculties = paginator.page(paginator.num_pages)
-#     if 'key_word' in request.GET:
-#         key = request.GET.get('words')
-#         cities = City.objects.filter(Q(city__icontains=key))
-#     else:
-#         cities = City.objects.all()
-#     return render(request, 'main.html', locals())
 
 
 class IndexListView(ListView):
@@ -51,7 +31,8 @@ def city_detail(request, id):
         id = request.POST.get('city_id')
         city = City.objects.get(id=id)
         text = request.POST.get('comment_text')
-        comment = CommentCity.objects.create(text=text, city=city, user=request.user)
+        comment = CommentCity.objects.create(
+            text=text, city=city, user=request.user)
     return render(request, 'cities/single.html', {'city': city_obj})
 
 
@@ -143,19 +124,13 @@ def university_delete(request, id):
 
 
 def university_detail(request, id):
-    faculties = Faculty.objects.all()
     university = University.objects.get(id=id)
     if 'comment' in request.POST:
         id = request.POST.get('university_id')
         university = University.objects.get(id=id)
         text = request.POST.get('comment_text')
-        comment = CommentUniversity.objects.create(text=text, university=university, user=request.user)
-    if 'favourite' in request.POST:
-        try:
-            favourite = Favourite.objects.get()
-            favourite.delete()
-        except:
-            Favourite.objects.create(user=request.user, university=university)
+        comment = CommentUniversity.objects.create(
+        text=text, university=university, user=request.user)
     return render(request, 'universities/single.html', locals())
 
 
